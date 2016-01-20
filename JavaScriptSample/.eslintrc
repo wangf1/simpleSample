@@ -5,7 +5,8 @@
 	"globals": {
 		"jQuery": true,
         "$": true,
-        "Q":true
+        "Q":true,
+        "com":true,
 	},
 
 	"rules": {
@@ -14,5 +15,6 @@
 		"no-extra-strict": 2,
 		"no-shadow-restricted-names": 2,
 		"no-restricted-modules": 0,
+		"no-underscore-dangle": 0
 	}
 }
