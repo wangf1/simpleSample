@@ -1,102 +1,106 @@
-var writeln = function(line) {
-    $("#output").append(line).append("<br>");
-};
+(function() {
 
-(function(global) {
-    "use strict";
+    var writeln = function(line) {
+        $("#output").append(line).append("<br>");
+    };
 
-    var Module = (function() {
+    (function(global) {
+        "use strict";
 
-        var data = "secret";
+        var Module = (function() {
 
-        var _privateMethod = function() {
-            writeln("This is private method.");
-        };
+            var data = "secret";
 
-        var publicMethod = function() {
-            writeln("This is public method, which call private method.");
-            _privateMethod();
-        };
+            var _privateMethod = function() {
+                writeln("This is private method.");
+            };
 
-        var toExpose = {
-            // This is some boolean property
-            bool: true,
-            // Some string value
-            string: "a string",
-            // An array property
-            array: [
-                1, 2, 3, 4
-            ],
-            // An object property
-            object: {
-                lang: "en-Us"
-            },
-            getData: function() {
-                // get the current value of `data`
-                return data;
-            },
-            setData: function(value) {
-                // set the value of `data` and return it
-                data = value;
-                return data;
-            },
-            publicMethod: publicMethod
-        };
-        return toExpose;
-    })();
+            var publicMethod = function() {
+                writeln("This is public method, which call private method.");
+                _privateMethod();
+            };
 
-    // Other things might happen here
+            var toExpose = {
+                // This is some boolean property
+                bool: true,
+                // Some string value
+                string: "a string",
+                // An array property
+                array: [
+                    1, 2, 3, 4
+                ],
+                // An object property
+                object: {
+                    lang: "en-Us"
+                },
+                getData: function() {
+                    // get the current value of `data`
+                    return data;
+                },
+                setData: function(value) {
+                    // set the value of `data` and return it
+                    data = value;
+                    return data;
+                },
+                publicMethod: publicMethod
+            };
+            return toExpose;
+        })();
 
-    // expose our module to the global object
-    global.Module = Module;
+        // Other things might happen here
 
-})(this);// The parameter this is the window object.
+        // expose our module to the global object
+        global.Module = Module;
 
-function declareModule(moduleName) {
-    var arrayOfStrings = moduleName.split(".");
-    var root = window[arrayOfStrings[0]];
-    root = root || {};
-    var parent = root;
-    for (var i = 1; i < arrayOfStrings.length; i++) {
-        var child = parent[arrayOfStrings[i]];
-        child = child || {};
-        parent[arrayOfStrings[i]] = child;
-        parent = child;
+    })(this);// The parameter this is the window object.
+
+    function declareModule(moduleName) {
+        var arrayOfStrings = moduleName.split(".");
+        var root = window[arrayOfStrings[0]];
+        root = root || {};
+        var parent = root;
+        for (var i = 1; i < arrayOfStrings.length; i++) {
+            var child = parent[arrayOfStrings[i]];
+            child = child || {};
+            parent[arrayOfStrings[i]] = child;
+            parent = child;
+        }
+        window[arrayOfStrings[0]] = root;
     }
-    window[arrayOfStrings[0]] = root;
-}
 // Note window.com.example.myGlobalNameSpace and com.example.myGlobalNameSpace are same thing.
 // See http://stackoverflow.com/a/5117172/1029242
-declareModule("com.example.myGlobalNameSpace");
+    declareModule("com.example.myGlobalNameSpace");
 
-(function(global) {
-    "use strict";
+    (function(global) {
+        "use strict";
 
-    var theSubModule = (function() {
+        var theSubModule = (function() {
 
-        var _privateMethod = function() {
-            writeln("This is private method in module com.example.myGlobalNameSpace.subModule.");
-        };
+            var _privateMethod = function() {
+                writeln("This is private method in module com.example.myGlobalNameSpace.subModule.");
+            };
 
-        var publicMethod = function() {
-            writeln("This is public method in module com.example.myGlobalNameSpace.subModule, which call private method.");
-            _privateMethod();
-        };
+            var publicMethod = function() {
+                writeln("This is public method in module com.example.myGlobalNameSpace.subModule, which call private method.");
+                _privateMethod();
+            };
 
-        var toExpose = {
-            publicMethod: publicMethod
-        };
-        return toExpose;
-    })();
+            var toExpose = {
+                publicMethod: publicMethod
+            };
+            return toExpose;
+        })();
 
-    // Other things might happen here
+        // Other things might happen here
 
-    // expose our module to the global object
-    global.subModule = theSubModule;
+        // expose our module to the global object
+        global.subModule = theSubModule;
 
-})(com.example.myGlobalNameSpace);
+    })(com.example.myGlobalNameSpace);
 
-$(document).ready(function() {
-    window.Module.publicMethod();
-    com.example.myGlobalNameSpace.subModule.publicMethod();
-});
+    $(document).ready(function() {
+        window.Module.publicMethod();
+        com.example.myGlobalNameSpace.subModule.publicMethod();
+    });
+
+})();
