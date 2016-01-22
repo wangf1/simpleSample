@@ -19,6 +19,16 @@
         writeln("The var1 is acctrually a local variable rather than golbal variable because of Hoisting, now it value is undefined: " + var1);
         var var1 = "Value of Local var1";
         writeln("Now the value of local var1 is: " + var1);
+
+        foo();
+        function foo() {
+            writeln("The named function foo cal be called before the defination because of hoisting.");
+        }
+
+        var bar = function() {
+            writeln("But the function variable bar cannot be called before the defination, because befroe assign a function to it, it is undefined.");
+        };
+        bar();
     }
 
     $(document).ready(function() {
