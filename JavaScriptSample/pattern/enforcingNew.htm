@@ -1,0 +1,20 @@
+<html>
+<head>
+</head>
+<body>
+	<script>
+        function Waffle() {
+            if (!(this instanceof Waffle)) {
+                return new Waffle();
+            }
+            this.tastes = "yummy";
+        }
+        var good_morning = new Waffle();
+        var good_evening = Waffle();
+        console.log(typeof good_morning); // "object"
+        console.log(good_morning.tastes); // "yummy"
+        console.log(typeof good_evening); // "object"
+        console.log(good_evening.tastes); // "yummy"
+    </script>
+</body>
+</html>
