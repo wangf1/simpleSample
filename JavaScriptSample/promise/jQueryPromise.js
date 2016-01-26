@@ -6,7 +6,7 @@
 
     function doAsync() {
         writeln("Async operation call begin.");
-        var deferredObject = $.Deferred();
+        var deferredObject = new $.Deferred();
         setTimeout(function() {
             var radomValue = Math.random();
             if (radomValue >= 0.1) {

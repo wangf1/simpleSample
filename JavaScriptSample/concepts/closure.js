@@ -51,7 +51,7 @@
 
         var toCallLater2 = setObjectPropertyByClosure(object, "key", "valueUpdated2");
 
-        var deferredObject = $.Deferred();
+        var deferredObject = new $.Deferred();
         setTimeout(function() {
             toCallLater2();
             deferredObject.resolve();
