@@ -1,0 +1,45 @@
+<html lang="en">
+<head>
+<title>JavaScript Patterns</title>
+<meta charset="utf-8">
+</head>
+<body>
+	<script>
+        (function immediateExecute() {
+
+            var Universe = function() {
+
+                // This check is the enforcing new patton, it has nothing to do with single pattern.
+                if (!(this instanceof Universe)) {
+                    return new Universe();
+                }
+                // The singleton instance
+                var instance = this;
+                this.startTime = 0;
+                this.bang = "Big";
+                //After the first time initialize, re-write the constructor. This is self-defining function pattern
+                Universe = function() {
+                    return instance;
+                };
+
+                // Static method pattern to get the singleton instance
+                Universe.getInstance = function() {
+                    return instance;
+                };
+                // Static property pattern to get the singleton instance
+                Universe.instance = instance;
+            }
+
+            var uni1 = Universe(); //Since we applied the enforcing new pattern, so the "new" key words is not necessary.
+            var uni2 = new Universe();
+            var uni3 = new Universe();
+            var uni4 = Universe.getInstance();
+            var uni5 = Universe.instance;
+            console.log(uni1 === uni2);
+            console.log(uni2 === uni3);
+            console.log(uni3 === uni4);
+            console.log(uni4 === uni5);
+        })();
+    </script>
+</body>
+</html>

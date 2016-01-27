@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+<title>JavaScript Patterns</title>
+<meta charset="utf-8">
+</head>
+<body>
+	<script>
+        /* Title: Chaining Pattern
+         Description: it enables you to call methods on an object one after the other
+         */
+        var obj = (function createObjImmediate() {
+            var privateValue = 1;
+            var increment = function() {
+                privateValue += 1;
+                //Note since the function will be called against the object, so the "this" is the object
+                return this;
+            };
+            var add = function(v) {
+                privateValue += v;
+                return this;
+            };
+            var shout = function() {
+                console.log(privateValue);
+            };
+            var toExpose = {
+                increment: increment,
+                add: add,
+                shout: shout
+            };
+            return toExpose;
+        })();
+        // chain method calls
+        obj.increment().add(3).shout(); // 5
+        // as opposed to calling them one by one
+        // obj.increment();
+        // obj.add(3);
+        // obj.shout();
+    </script>
+</body>
+</html>

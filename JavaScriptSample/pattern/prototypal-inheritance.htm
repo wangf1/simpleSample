@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+<title>JavaScript Patterns</title>
+<meta charset="utf-8">
+</head>
+<body>
+	<script>
+        (function() {
+            //Before Object.create(...) available
+            var inheritFrom = function(parentObject) {
+                var F = function() {
+                };
+                F.prototype = parentObject;
+                return new F();
+            }
+
+            var person = {
+                "name": "John"
+            };
+
+            var employee = inheritFrom(person);
+            console.log(employee.name);
+
+            //All morden browser include IE9 have Object.create(...) method. See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create
+            var employee2 = Object.create(person, {
+                "addtionalProperty1": {
+                    value: "value1",
+                    enumerable: true
+                },
+                "p2": {
+                    value: "v2",
+                    writable: true,
+                    enumerable: true,
+                    configurable: true
+                }
+            })
+            for ( var p in employee2) {
+                console.log(p + ": " + employee2[p]);
+            }
+        })();
+    </script>
+</body>
+</html>
