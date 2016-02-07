@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -51,6 +50,9 @@ public class MapAndReduceOnStream {
 		boolean allNameLongerThan3ContainsM = persons.stream().map(person -> person.getName())
 				.filter(name -> name.length() >= 3).allMatch(name -> name.contains("m"));
 		System.out.println(allNameLongerThan3ContainsM);
+
+		Optional<Integer> maxResult3 = list.stream().reduce(Integer::max);
+		System.out.println(maxResult3.get());
 	}
 
 	public static void main(String[] args) {
@@ -59,21 +61,4 @@ public class MapAndReduceOnStream {
 		demo.reduce();
 	}
 
-	private static class Person {
-		private int age;
-		private String name;
-
-		public Person(String name, int age) {
-			this.age = age;
-			this.name = name;
-		}
-
-		public int getAge() {
-			return age;
-		}
-
-		public String getName() {
-			return name;
-		}
-	}
 }
