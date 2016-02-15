@@ -1,6 +1,6 @@
 package com.wangf.stream;
 
-class Person {
+public class Person {
 	private int age;
 	private String name;
 
@@ -16,4 +16,10 @@ class Person {
 	public String getName() {
 		return name;
 	}
+
+	@Override
+	public String toString() {
+		return "Person [name=" + name + ", age=" + age + "]";
+	}
+
 }
