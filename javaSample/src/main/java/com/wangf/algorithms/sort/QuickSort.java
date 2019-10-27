@@ -1,10 +1,8 @@
 package com.wangf.algorithms.sort;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.Arrays;
-
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class QuickSort {
 
@@ -62,6 +60,7 @@ public class QuickSort {
 
 	@Test
 	public void testQuickSort() throws Exception {
+
 		int[] a = new int[] { 5, 1, 3, 8, 9, 2, 4, 7, 6 };
 		testQuickSort(a);
 
